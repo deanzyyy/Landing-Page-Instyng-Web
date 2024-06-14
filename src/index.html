@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
+    <title>Instyng Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .btn {
+            @apply text-white font-semibold py-2 px-4 rounded-lg transition transform duration-200;
+        }
+        .btn-primary {
+            @apply bg-pink-500;
+        }
+        .btn-primary:hover {
+            @apply bg-pink-600 scale-105;
+        }
+        .btn-secondary {
+            @apply bg-gray-100 text-gray-800;
+        }
+        .btn-secondary:hover {
+            @apply bg-gray-200;
+        }
+        .icon {
+            @apply bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-white;
+        }
+        .grid-background {
+            background-image: radial-gradient(circle, #D3D3D3 1px, rgba(255, 255, 255, 0) 1px);
+            background-size: 20px 20px;
+        }
+        .transparent-card, .transparent-banner {
+            @apply bg-white bg-opacity-75 p-6 rounded-lg shadow-lg;
+        }
+        .navbar-bg-transparent {
+            background-color: rgba(255, 255, 255, 0.75);
+        }
+         /* Animasi ketikan */
+         @keyframes typing {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+        }
+    }
+
+    .typing-animation {
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 3px solid cyan; /* Ketebalan dan warna cyan pada kursor */
+        animation: typing 3s steps(20, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes blink-caret {
+        from, to {
+            border-color: transparent;
+        }
+        50% {
+            border-color: cyan; /* Warna cyan pada kursor */
+        }
+    }
+     /* Animasi untuk efek slot machine */
+     @keyframes slotMachine {
+        0% { transform: translateY(0); }
+        25% { transform: translateY(-10%); }
+        50% { transform: translateY(10%); }
+        75% { transform: translateY(-5%); }
+        100% { transform: translateY(0); }
+    }
+
+    /* Menerapkan animasi ke angka pada elemen HTML */
+    #project-number {
+        animation: slotMachine 2s infinite;
+    }
+
+    /* Tambahkan gaya khusus di sini */
+    .fade-in {
+            opacity: 0;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateX(-50px);
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+
+      /* Styling untuk popup */
+      .popup-outer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .popup-inner {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Styling untuk tombol detail */
+        .btn-detail {
+            background-color: #7dd3fc;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-detail:hover {
+            background-color: #4cadf7;
+        }
+
+        /* Styling untuk tombol close */
+        .btn-close {
+            background-color: #7dd3fc;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-close:hover {
+            background-color: #4cadf7;
+        }
+
+        /* Animasi muncul saat di-scroll */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+        }
+
+        .navbar-hidden {
+        display: none;
+    }
+
+
+    /* animasi untuk card */
+    .card {
+    opacity: 0;
+    transform: translateY(50px); /* Posisi awal di bawah */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Transisi untuk efek fade in */
+}
+
+.card.animate {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir */
+}
+
+
+/* bubble chat animasi */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.bubble-chat {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* kartu */
+.kartu{
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+.kartu:hover .gambar img{
+    
+    transform: translateZ(100px);
+}
+
+/* media partner */
+@keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .marquee {
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      padding: 2rem 0; /* Menambah ukuran kontainer */
+    }
+
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 15s linear infinite;
+    }
+
+    .marquee:hover .marquee-content {
+      animation-play-state: paused;
+    }
+
+    .marquee-content img {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+
+    .bg-pattern {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMjQiIGNsYXNzPSJoaWRkZW4gdmcgYmctaW5saW5lIGJvcmRlci1ib3ggYm9yZGVyLXRlYWwtbG93IGJvcmRlci1ncmF5LTAwMDAgdGV4dC1jZW50ZXIgZC1ibG9jayBtYi00IG0tdi0xIiB2aWV3Qm94PSIwIDAgMTQwIDI0Ij4KICA8cmVjdCB4PSI4MCIgd2lkdGg9IjYiIGhlaWdodD0iMjQiIGZpbGw9IiMyMjIiIHg9IjAiIHk9IjAiPjwvcmVjdD4KICA8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSIyNCIgZmlsbD0iI0VFRUUiIHg9IjEyIiB5PSIwIj48L3JlY3Q+CiAgPHJlY3Qgd2lkdGg9IjQiIGhlaWdodD0iMjQiIGZpbGw9IiNEREQiIHg9IjYiIHk9IjAiPjwvcmVjdD4KPC9zdmc+');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    </style>
+    <link href="./output.css" rel="stylesheet">
+</head>
+<body class="bg-white font-sans grid-background">
+    <div class="container mx-auto px-4">
+ <!-- Navigation Bar -->
+ <div id="navbar" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-4 px-4 shadow-md mb-8 navbar-hidden"">
+    <!-- Logo Instyng -->
+    <div class="flex items-center">
+        <img src="../img/logo.png" alt="Instyng Logo" class="h-16 mr-2">
+        <div class="text-3xl font-bold text-cyan-400">Instyng</div>
+    </div>
+    <nav class="hidden md:block space-x-8">
+        <a href="#Main" class=" text-1xl font-bold hover:text-cyan-400 hover:border-b-4 hover:border-cyan-400 mb-4 text-gray-600">Benefit</a>
+        <a href="#ProdukJasa" class="text-1xl font-bold hover:text-cyan-400 hover:border-b-4 hover:border-cyan-400 mb-4 text-gray-600">Produk Jasa</a>
+        <a href="#Tentang" class=" text-1xl font-bold hover:text-cyan-400 hover:border-b-4 hover:border-cyan-400 mb-4 text-gray-600">Tentang</a>
+        <a href="#PriceList" class=" text-1xl font-bold hover:text-cyan-400 hover:border-b-4 hover:border-cyan-400 mb-4 text-gray-600">Price List</a>
+    </nav>
+    
+    <div class="hidden md:flex space-x-4">
+        <a href="https://wa.me/6289617596278" target="_blank" class="btn btn-secondary bg-gradient-to-r from-cyan-400 to-blue-500 text-white px-4 py-4 rounded-lg">Pesan Sekarang</a>
+
+    </div>
+</div>
+        <!-- Mobile Navigation -->
+        <div class="md:hidden flex justify-between items-center py-4">
+            <div class="text-2xl font-bold">Instyng</div>
+            <button class="btn btn-secondary">Menu</button>
+        </div>
+
+        
+<!-- Chat bott button -->
+        <button id="chatbot-button" class="fixed bottom-8 right-8 h-16 w-16 item-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded-full">
+            Chat
+          </button>
+
+
+     <!-- Main Banner -->
+     <div id="Main" class="px-32 transparent-banner mt-8 md:grid md:grid-cols-2 md:items-center text-center md:text-left relative" style="margin-top: 120px;">
+        <div class="md:p-4 flex flex-col items-center md:items-start justify-center">
+            <h1 class="text-6xl font-bold text-cyan-800 typing-animation relative"><span class="text-cyan-400">Instyng , </span>Shortcut To<br> Academic Success!<span class="text-transparent">|</span></h1>
+            <h1 class="text-2xl font-bold text-cyan-800">Joki apa aja, Disini tempatnya!.</h1>
+            <p class="mt-4 text-gray-600">Solusi untuk tugas lo yang dikejar Deadline. Cobain Instyng jasa joki apa aja yang lo butuhin.</p>
+            <button class="btn btn-primary mt-4 bg-cyan-400 w12 h-12 px-4 rounded-lg font-bold text-white">Coba Dulu!</button>
+        </div>
+        <div class="md:p-4 flex justify-center relative">
+            <!-- Elemen vektor acak -->
+            <div class="absolute top-0 left-0">
+                <!-- Balon percakapan -->
+                <div class="mt-16 ml-4 p-4 bg-white rounded-lg shadow-md z-20 relative bubble-chat">
+                    <p class="text-gray-800">Menyala Tugaskuuuu!</p>
+                </div>
+            </div>
+            <!-- Lingkaran di belakang gambar -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-br from-cyan-400 to-sky-200 h-80 w-80 rounded-full z-0"></div>
+            <!-- Gambar cewe -->
+            <img src="../img/cewe.png" alt="Main Banner Image" class="mx-auto w-auto max-w-full md:max-w-md lg:max-w-lg xl:max-w-xl z-20">
+            <!-- Elemen vektor random -->
+            <!-- Bubble chat kanan atas -->
+            <div class="absolute top-8 right-12">
+                <div class="p-4 bg-white rounded-lg shadow-md z-20 relative bubble-chat">
+                    <p class="text-gray-800">Pasti dipuji dosen!.</p>
+                </div>
+            </div>
+            <!-- Bubble chat kanan bawah -->
+            <div class="absolute bottom-12 right-4">
+                <div class="p-4 bg-white rounded-lg shadow-md z-20 relative bubble-chat">
+                    <p class="text-gray-800">Dijamin Fast Hand!.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+      
+
+    <!-- our benefits section -->
+    <div id="Benefit" class="flex">
+        <section class="relative mt-16 py-8 px-8 md:px-16 lg:px-16 lg:w-1/2">
+            <h2 class="text-4xl font-bold text-center text-cyan-400">Our Benefits</h2>
+            <div class="overflow-hidden relative mt-8">
+                <div id="benefits-slider" class="flex transition-transform duration-1000 ease-in-out">
+                    <div class="flex-none w-full p-4"> 
+                        <div class="bg-cyan-400 rounded-lg shadow-md p-6">
+                            <div class="flex items-center justify-center mb-4">
+                                <span class="icon bg-white w-12 h-12 rounded-full flex items-center justify-center text-white">1</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white text-center">Harga Terjangkau</h3>
+                            <p class="mt-2 text-white text-center">Access your courses anytime, anywhere.</p>
+                        </div>
+                    </div>
+                    <div class="flex-none w-full p-4">
+                        <div class="bg-cyan-400 rounded-lg shadow-md p-6">
+                            <div class="flex items-center justify-center mb-4">
+                                <span class="icon bg-white w-12 h-12 rounded-full flex items-center justify-center text-white">2</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white text-center">Consultation</h3>
+                            <p class="mt-2 text-white text-center">Get expert advice anytime you need.</p>
+                        </div>
+                    </div>
+                    <div class="flex-none w-full p-4">
+                        <div class="bg-cyan-400 rounded-lg shadow-md p-6">
+                            <div class="flex items-center justify-center mb-4">
+                                <span class="icon bg-white w-12 h-12 rounded-full flex items-center justify-center text-white">3</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white text-center">Online Access</h3>
+                            <p class="mt-2 text-white text-center">Access your courses from any device.</p>
+                        </div>
+                    </div>
+                    <div class="flex-none w-full p-4">
+                        <div class="bg-cyan-400 rounded-lg shadow-md p-6">
+                            <div class="flex items-center justify-center mb-4">
+                                <span class="icon bg-white w-12 h-12 rounded-full flex items-center justify-center text-white">4</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white text-center">Certification</h3>
+                            <p class="mt-2 text-white text-center">Earn certificates upon course completion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+    
+        <section class="relative mt-16 py-8 px-8 md:px-16 lg:px-16 lg:w-1/2">
+            <h2 class="text-4xl font-bold text-center text-cyan-400">Total Projects</h2>
+            <div class="overflow-hidden relative mt-8">
+                <div id="total-projects" class="flex justify-center bg-cyan-400 rounded-lg shadow-md p-8">
+                    <div class="flex flex-col items-center">
+                        <h4 class="text-2xl font-bold text-white mb-4">Yang Sudah Kita Kerjain</h4>
+                        <p id="project-number" class="text-5xl font-bold text-white">800</p>
+                        <p class="text-semibold text-2xl text-white">projects</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+    
+
+
+
+        <!-- Feature Section -->
+        <section id="ProdukJasa" class="mt-8 md:mt-16 text-center">
+    <h2 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-400 text-transparent bg-clip-text">Jasa Yang Kita Tawarkan</h2>
+    <p class="mt-4 text-gray-600">Tugas apa aja yang bakal kita bantuin? ada semua disini cuy!.</p>
+    <div class="flex flex-col md:flex-row justify-center items-center mt-8 space-y-8 md:space-y-0 md:space-x-4">
+        <div class="kartu rounded-lg overflow-hidden shadow-md bg-white flex flex-col justify-center items-center card md:w-64">
+            <div class="gambar">
+            <img src="../img/figma.png" alt="Main Banner Image" class=" w-32 md:w-48 px-4">
+        </div>
+            <div class="p-4">
+                <h3 class="text-lg md:text-xl font-semibold text-gray-800">Ui/Ux Design</h3>
+                <p class="mt-2 text-gray-600">Create your projects and start tracking time immediately.</p>
+                <button class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded ">Pesan Sekarang</button>
+            </div>
+        </div>
+        <div class="kartu rounded-lg overflow-hidden shadow-md bg-white flex flex-col justify-center items-center card md:w-64">
+            <img src="../img/vscode.png" alt="Main Banner Image" class="w-32 md:w-48 px-4">
+            <div class="p-4">
+                <h3 class="text-lg md:text-xl font-semibold text-gray-800">Website Development</h3>
+                <p class="mt-2 text-gray-600">Create your projects and start tracking time immediately.</p>
+                <button class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded">Pesan Sekarang</button>
+            </div>
+        </div>
+        <div class="kartu rounded-lg overflow-hidden shadow-md bg-white flex flex-col justify-center items-center card md:w-64">
+            <img src="../img/Ai.png" alt="Main Banner Image" class="w-32 md:w-48 px-4">
+            <div class="p-4">
+                <h3 class="text-lg md:text-xl font-semibold text-gray-800">Graphic Design</h3>
+                <p class="mt-2 text-gray-600">Create your projects and start tracking time immediately.</p>
+                <button class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded">Pesan Sekarang</button>
+            </div>
+        </div>
+        <div class="kartu rounded-lg overflow-hidden shadow-md bg-white flex flex-col justify-center items-center card md:w-64">
+            <img src="../img/word.png" alt="Main Banner Image" class="w-32 md:w-48 px-4">
+            <div class="p-4">
+                <h3 class="text-lg md:text-xl font-semibold text-gray-800">Makalah/Laporan</h3>
+                <p class="mt-2 text-gray-600">Create your projects and start tracking time immediately.</p>
+                <button class="mt-4 bg-cyan-400 text-white px-4 py-2 rounded">Pesan Sekarang</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+        
+        <!-- About -->
+
+        <section id="Tentang" class="mt-16 px-4 lg:px-32">
+            <h2 class="text-3xl font-bold text-center text-cyan-400">Tentang Kita</h2>
+            <p class="text-1xl text-center text-grey-800 mb-8">anjay tentang kita gak tuh, unchh!</p>
+            <div class="flex flex-col md:flex-row justify-between items-center relative">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <img src="../img/about.jpg" alt="About Us" class="w-80 rounded-lg shadow-md pr-8 border border-cyan-400 fade-in">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-3xl font-bold text-cyan-400 mb-4 fade-in">Story</h3>
+                    <hr class="w-16 border-t-2 border-cyan-400 mb-4">
+                    <p class="text-gray-600 leading-relaxed fade-in">Instyng was founded in 20XX with the mission to provide students with reliable and efficient assistance for their academic tasks. Over the years, we have grown into a team of dedicated professionals committed to helping students achieve their academic goals.</p>
+                    <h3 class="text-3xl font-bold text-cyan-400 mt-8 mb-4 fade-in">Our Mission</h3>
+                    <hr class="w-16 border-t-2 border-cyan-400 mb-4">
+                    <p class="text-gray-600 leading-relaxed fade-in">Our mission is to simplify the academic journey for students by offering high-quality services tailored to their needs. We aim to be the go-to platform for students seeking assistance with their assignments, projects, and academic tasks.</p>
+                    <h3 class="text-3xl font-bold text-cyan-400 mt-8 mb-4 fade-in">Our Team</h3>
+                    <hr class="w-16 border-t-2 border-cyan-400 mb-4">
+                    <p class="text-gray-600 leading-relaxed fade-in">At Instyng, we have a team of experienced professionals from diverse backgrounds who are passionate about education and dedicated to helping students succeed. Our team members are experts in their respective fields and are committed to delivering excellent results.</p>
+                </div>
+            </div>
+        </section>
+
+
+
+     <!-- Bagian Price List -->
+     <section id="PriceList" class="mt-16 px-4 lg:px-32 relative">
+        <h2 class="text-4xl font-bold text-center text-cyan-400">Price List</h2>
+        <p class="text-1xl text-center text-grey-800 mb-8">Lo jangan Khawatir soal harga, disini harga Mahasiswa banget dah pokoknya.</p>
+        <!-- Daftar harga -->
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <!-- Card Harga 1 -->
+            <div class="md:w-1/3 p-4">
+                <div class="bg-cyan-400 rounded-lg shadow-md p-6 fade-in">
+                    <h3 class="text-2xl font-bold text-white mb-2">Basic Package</h3>
+                    <p class="text-gray-200 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="text-gray-100 font-semibold text-xl">Harga: Rp.50.000</p>
+                    <button class="btn-detail bg-cyan-800 hover:bg-cyan-600 text-white px-4 py-2 rounded mt-4" data-package="basic">Detail</button>
+                </div>
+            </div>
+            <!-- Card Harga 2 -->
+            <div class="md:w-1/3 p-4">
+                <div class="bg-cyan-400 rounded-lg shadow-md p-6 fade-in">
+                    <h3 class="text-2xl font-bold text-white mb-2">Standard Package</h3>
+                    <p class="text-gray-200 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="text-gray-100 font-semibold text-xl">Harga: Rp.150.000</p>
+                    <button class="btn-detail bg-cyan-800 hover:bg-cyan-600 text-white px-4 py-2 rounded mt-4" data-package="standard">Detail</button>
+                </div>
+            </div>
+            <!-- Card Harga 3 -->
+            <div class="md:w-1/3 p-4">
+                <div class="bg-cyan-400 rounded-lg shadow-md p-6 fade-in">
+                    <h3 class="text-2xl font-bold text-white mb-2">Premium Package</h3>
+                    <p class="text-gray-200 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p class="text-gray-100 font-semibold text-xl">Harga: Rp.1.000.000</p>
+                    <button class="btn-detail bg-cyan-800 hover:bg-cyan-600 text-white px-4 py-2 rounded mt-4" data-package="premium">Detail</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="popup-outer fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden" id="popupBasic">
+        <div class="popup-inner bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+            <h3 class="text-2xl font-bold text-cyan-400 mb-4">Basic Package Details</h3>
+            <p class="text-gray-600 mb-4">Dengan Basic Package, Anda akan mendapatkan:</p>
+            <ul class="list-disc pl-5 text-gray-600 mb-4">
+                <li>Pengerjaan tugas dalam waktu 3 hari</li>
+                <li>Konsultasi melalui chat selama pengerjaan</li>
+                <li>Revisi 1 kali setelah pengerjaan selesai</li>
+            </ul>
+            <a href="https://wa.me/6289617596278" class="btn-order bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded mt-4 w-full">Pesan Sekarang</a>
+            <button class="btn-close bg-cyan-400 text-white px-4 py-2 rounded mt-6 w-full">Close</button>
+        </div>
+    </div>
+    
+    <div class="popup-outer fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden" id="popupStandard">
+        <div class="popup-inner bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+            <h3 class="text-2xl font-bold text-blue-400 mb-4">Standard Package Details</h3>
+            <p class="text-gray-600 mb-4">Dengan Standard Package, Anda akan mendapatkan:</p>
+            <ul class="list-disc pl-5 text-gray-600 mb-4">
+                <li>Pengerjaan tugas dalam waktu 2 hari</li>
+                <li>Konsultasi melalui chat dan video call selama pengerjaan</li>
+                <li>Revisi 2 kali setelah pengerjaan selesai</li>
+            </ul>
+            <a href="https://wa.me/6289617596278" class="btn-order bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded mt-4 w-full">Pesan Sekarang</a>
+            <button class="btn-close bg-cyan-400 text-white px-4 py-2 rounded mt-6 w-full">Close</button>
+        </div>
+    </div>
+    
+    <div class="popup-outer fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden" id="popupPremium">
+        <div class="popup-inner bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+            <h3 class="text-2xl font-bold text-red-500 mb-4">Premium Package Details</h3>
+            <p class="text-gray-600 mb-4">Dengan Premium Package, Anda akan mendapatkan:</p>
+            <ul class="list-disc pl-5 text-gray-600 mb-4">
+                <li>Pengerjaan tugas dalam waktu 1 hari</li>
+                <li>Konsultasi melalui chat, video call, dan kunjungan langsung selama pengerjaan</li>
+                <li>Revisi tidak terbatas setelah pengerjaan selesai</li>
+                <li>Dukungan prioritas selama pengerjaan dan revisi</li>
+            </ul>
+            <a href="https://wa.me/6289617596278" class="btn-order bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded-lg mt-4 w-full">Pesan Sekarang</a>
+            <button class="btn-close bg-cyan-400 text-white px-4 py-2 rounded mt-6 w-full">Close</button>
+        </div>
+    </div>
+
+<!-- Media Partner -->
+
+<section class="bg-cyan-400 py-8 overflow-hidden relative bg-pattern rounded-lg">
+    <div class="flex items-center justify-center mb-4">
+      <div class=" text-white text-2xl font-bold px-4 py-2">
+        Media Partner
+      </div>
+    </div>
+    <div class="marquee">
+      <div class="marquee-content">
+        <img src="logo1.png" alt="Logo 1" class="h-16 inline-block">
+        <img src="logo2.png" alt="Logo 2" class="h-16 inline-block">
+        <img src="logo3.png" alt="Logo 3" class="h-16 inline-block">
+        <img src="logo4.png" alt="Logo 4" class="h-16 inline-block">
+        <img src="logo5.png" alt="Logo 5" class="h-16 inline-block">
+        <!-- Tambahkan logo lainnya sesuai kebutuhan -->
+      </div>
+    </div>
+  </section>
+
+
+    
+    <!-- portfolio -->
+    <section id="Portfolio" class="mt-16 px-4 lg:px-32 relative">
+        <h2 class="text-4xl font-bold text-center text-cyan-400">Our Portfolio</h2>
+        <p class="text-1xl text-center text-grey-800 mb-8">Berikut adalah beberapa hasil karya yang telah kami buat untuk klien kami.</p>
+    
+        <!-- Buttons for Categories -->
+        <div class="flex justify-center mb-8 space-x-4">
+            <button class="btn-category bg-cyan-400 text-white px-4 py-2 rounded" onclick="showPortfolio('logo')">Logo</button>
+            <button class="btn-category bg-cyan-400 text-white px-4 py-2 rounded" onclick="showPortfolio('makalah')">Makalah</button>
+            <button class="btn-category bg-cyan-400 text-white px-4 py-2 rounded" onclick="showPortfolio('webdev')">Website Dev</button>
+            <button class="btn-category bg-cyan-400 text-white px-4 py-2 rounded" onclick="showPortfolio('motiongraphic')">Motion Graphic</button>
+        </div>
+    
+        <!-- Portfolio Items -->
+        <div id="portfolio-items" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <!-- Portfolio content will be injected here based on the selected category -->
+        </div>
+    </section>
+    
+    
+
+    <!-- 3D  -->
+    <div id="canvas-container"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script> <!-- Include GLTFLoader -->
+        
+        
+    
+        <!-- Footer -->
+        <footer class="mt-16 bg-gray-50 py-8">
+            <div class="text-center text-gray-600">
+                <p>Ready to get started?</p>
+                <button class="btn btn-primary mt-4">Download</button>
+                <div class="mt-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div>
+                            <h3 class="font-bold text-gray-800">Services</h3>
+                            <ul class="mt-4 space-y-2 text-gray-600">
+                                <li><a href="#">Email Marketing</a></li>
+                                <li><a href="#">Campaigns</a></li>
+                                <li><a href="#">Branding</a></li>
+                                <li><a href="#">Offline</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800">About</h3>
+                            <ul class="mt-4 space-y-2 text-gray-600">
+                                <li><a href="#">Our Story</a></li>
+                                <li><a href="#">Benefits</a></li>
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">Careers</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-800">Help</h3>
+                            <ul class="mt-4 space-y-2 text-gray-600">
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-8 text-gray-600">
+                        <p>Terms & Conditions | Privacy Policy</p>
+                    </div>
+                    <div class="mt-4 flex justify-center space-x-4">
+                        <a href="#" class="text-gray-600"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-600"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-600"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="../vanilla-tilt.min.js"></script>
+    <script type="text/javascript">
+        VanillaTilt.init(document.querySelectorAll(".kartu"), {
+            max: 25,
+            speed: 400,
+            glare: true
+
+        });
+        
+        //It also supports NodeList
+        VanillaTilt.init(document.querySelectorAll(".kartu"));
+    </script>
+
+    
+</body>
+</html>

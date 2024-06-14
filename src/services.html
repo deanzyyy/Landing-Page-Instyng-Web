@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instyng - Our Services</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS for a futuristic look */
+        .neon-text {
+            color: #00f0ff;
+            text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+        }
+        .bg-futuristic {
+            background: linear-gradient(135deg, rgba(0, 0, 50, 0.9) 0%, rgba(0, 100, 200, 0.9) 100%);
+        }
+    </style>
+</head>
+<body class="bg-futuristic text-white min-h-screen flex flex-col">
+    <header class="flex justify-between items-center p-4">
+        <div class="text-3xl font-bold neon-text">Instyng</div>
+        <nav class="space-x-4">
+            <a href="index.html" class="text-white hover:text-blue-300">Home</a>
+            <a href="#" class="text-white hover:text-blue-300">Tentang</a>
+            <div class="relative group inline-block">
+                <button class="text-white hover:text-blue-300">Layanan</button>
+                <div class="absolute hidden group-hover:block bg-white text-black mt-2 rounded-lg shadow-lg py-2">
+                    <a href="#" class="block px-4 py-2 hover:bg-blue-500 hover:text-white">Layanan 1</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-blue-500 hover:text-white">Layanan 2</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-blue-500 hover:text-white">Layanan 3</a>
+                </div>
+            </div>
+            <a href="#" class="text-white hover:text-blue-300">Kontak</a>
+        </nav>
+    </header>
+    <main class="flex-1 flex flex-col items-center justify-center text-center p-4">
+        <h1 class="text-4xl sm:text-6xl font-extrabold neon-text mb-6">Our Services</h1>
+        <p class="text-xl sm:text-2xl mb-8">We specialize in creating futuristic websites that captivate and inspire.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                <h2 class="text-2xl font-bold neon-text mb-4">Website Development</h2>
+                <p>We build state-of-the-art websites tailored to your needs.</p>
+            </div>
+            <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                <h2 class="text-2xl font-bold neon-text mb-4">UI/UX Design</h2>
+                <p>Our designs are not only visually stunning but also user-friendly.</p>
+            </div>
+            <div class="bg-black bg-opacity-50 p-6 rounded-lg">
+                <h2 class="text-2xl font-bold neon-text mb-4">E-commerce Solutions</h2>
+                <p>We provide robust e-commerce platforms to boost your online sales.</p>
+            </div>
+        </div>
+    </main>
+    <footer class="p-4 text-center">
+        <p>&copy; 2024 Instyng. All rights reserved.</p>
+    </footer>
+</body>
+</html>
